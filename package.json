@@ -1,0 +1,42 @@
+{
+  "name": "file-line-replacer",
+  "version": "0.0.0",
+  "description": "Replaces multiple lines of text within a file.",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix src/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FredLackey/file-line-replacer.git"
+  },
+  "keywords": [
+    "sed",
+    "awk",
+    "lines",
+    "replace"
+  ],
+  "author": {
+    "name": "Fred Lackey",
+    "email": "fred.lackey@gmail.com",
+    "url": "http://www.fredlackey.com"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/FredLackey/file-line-replacer/issues"
+  },
+  "homepage": "https://github.com/FredLackey/file-line-replacer#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}

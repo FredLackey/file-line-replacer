@@ -1,0 +1,80 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "01 - Arrays",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/01-arrays.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "02 - Keep Whitespace",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/02-keep-whitespace.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "03 - Case Sensitive",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/03-case-sensitive.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "04 - Match Whitespace (Bad)",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/04-match-whitespace-bad.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "05 - Match Whitespace (Good)",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/05-match-whitespace-good.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "06 - Match Complete",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/06-match-complete.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "07 - New Lines File",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/07-new-lines-file.js"
+    },    
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "08 - New Lines File (Preserve)",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/08-new-lines-file-preserve.js"
+    },
+  ]
+}
