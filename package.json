@@ -1,7 +1,7 @@
 {
   "name": "file-line-replacer",
   "version": "0.2.1",
-  "description": "Replaces multiple lines of text within a file.",
+  "description": "Replaces multiple lines within large text files.",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint ./src",
