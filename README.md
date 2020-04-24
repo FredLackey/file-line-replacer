@@ -46,7 +46,7 @@ const results = replacer({
 | `backupDirDate` | `true` | Creates a timestamp subdirectory within the `backupDir`.  |
 | `makeDirs` | `true` | Creates the `tempDir` and folder for `destinationFile` if it does not exist.  |
 | `oldLines` |  |  Alternative to `oldLinesFile`.  Array of specific lines to search for and replace. |
-| `oldLineFile` |  |  Alternative to `oldLines`.  Test file containing lines to search for an replace.  |
+| `oldLineFile` |  |  Alternative to `oldLines`.  Test file containing lines to search for and replace.  |
 | `newLines` |  |  Alternative to `newLinesFile`.  Array of specific lines to write to destination file. |
 | `newLineFile` |  |  Alternative to `newLines`.  Test file containing lines to write to destination file.  |
 | `emptyLines` | `false` |  Equivilent to setting both `emptyLinesNew` and `emptyLinesOld`. |
