@@ -1,9 +1,9 @@
-const _         = require('file-line-replacer-common').utils;
 const fs        = require('fs');
 const os        = require('os');
 const path      = require('path');
 const readline  = require('readline');
-const { bootstrap } = require('file-line-replacer-common');
+const bootstrap = require('./bootstrap');
+const _         = require('./utils');
 
 const handleLine = (cache, curLine) => {
   cache.lineCount += 1;

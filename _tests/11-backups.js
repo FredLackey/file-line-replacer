@@ -30,7 +30,7 @@ const opts = {
 
 const main = async () => {
   const result = await test(opts);
-  console.log(JSON.stringify(result));
+  console.log(JSON.stringify(result, null, 2));
 };
 
 main();

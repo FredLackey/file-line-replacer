@@ -31,7 +31,7 @@ const opts = {
 const main = async () => {
   _.makePath(NEW_DIR);
   const result = await test(opts);
-  console.log(JSON.stringify(result));
+  console.log(JSON.stringify(result, null, 2));
 };
 
 main();
