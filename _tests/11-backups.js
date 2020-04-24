@@ -1,6 +1,6 @@
 const path = require('path');
 const test = require('../src');
-const _     = require('../src/utils');
+const _     = require('file-line-replacer-common').utils;
 
 const OLD_FILE = path.resolve(path.join(__dirname), '../samples/sample-model.js');
 const OLD_LINES = [

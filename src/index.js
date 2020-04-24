@@ -1,9 +1,9 @@
+const _         = require('file-line-replacer-common').utils;
 const fs        = require('fs');
 const os        = require('os');
 const path      = require('path');
 const readline  = require('readline');
-const bootstrap = require('./bootstrap');
-const _         = require('./utils');
+const { bootstrap } = require('file-line-replacer-common');
 
 const handleLine = (cache, curLine) => {
   cache.lineCount += 1;
@@ -101,12 +101,10 @@ const replaceLines = async (sourceFile, destinationFile, blocks, oldLines, newLi
         const suffix  = pad.suffix === 0 ? '' : ''.padStart(pad.suffix, ' ');
         const newLine = preserveWhitespace ? (prefix + newLines[i].trim() + suffix) : newLines[i];
         await outStream.write(newLine + os.EOL);
-        // console.log(newLine);
       }
 
     } else if (!impacted.includes(lineNumber)) {
       await outStream.write(line + os.EOL);
-      // console.log(line);
     }
 
   }
@@ -167,8 +165,10 @@ module.exports = async (opts) => {
   _.copyContents(tempFilePath, opts.destinationFile);
   _.deleteFile(tempFilePath);
 
-  console.log(path.dirname(tempFilePath));
-  console.log(tempFilePath);
-
-  return impacted;
+  return { 
+    impacted, 
+    tempFilePath,
+    isOverwrite,
+    options : JSON.parse(JSON.stringify(opts))
+  };
 }

@@ -66,3 +66,4 @@ const results = replacer({
 | `2020-04-23` | `v0.1.0` |  _WIP_  Added overwrite and custom `tempDir` functionality.  |
 | `2020-04-24` | `v0.2.0` |  _WIP_  Added `backupDir` & `makeDirs` functionality.  |
 |  | `v0.2.1` |  _WIP_  Added `backupDirDate` functionality.  |
+|  | `v0.3.0` |  _WIP_  Integrated `file-line-replacer-common`.  |
