@@ -35,6 +35,7 @@ const results = replacer({
 |------------|-----------|-----------|
 | `sourceFile` |  |  File containing lines of text to replace.  |
 | `destinationFile` |  | Optional file path if changes should be written to a new file. |
+| `tempDir` |  | Optional directory path to use while generating the new file. |
 | `oldLines` |  |  Alternative to `oldLinesFile`.  Array of specific lines to search for and replace. |
 | `oldLineFile` |  |  Alternative to `oldLines`.  Test file containing lines to search for an replace.  |
 | `newLines` |  |  Alternative to `newLinesFile`.  Array of specific lines to write to destination file. |
@@ -51,5 +52,6 @@ const results = replacer({
 
 |  Date  |  Version  |  Details  |
 |--------|-----------|-----------|
-| `2020-04-23` | `v0.0.0` |  Work in progress.  Works well.  Need to add ability to overwrite working file.  |
+| `2020-04-23` | `v0.0.0` |  _WIP_  Works well.  Need to add ability to overwrite working file.  |
 |  | `v0.0.1` |  Create README just in case someone finds the repo before it's ready.  |
+| `2020-04-23` | `v0.1.0` |  _WIP_  Added overwrite and custom `tempDir` functionality.  |

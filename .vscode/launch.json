@@ -76,5 +76,23 @@
       ],
       "program": "${workspaceFolder}/_tests/08-new-lines-file-preserve.js"
     },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "09 - New File",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/09-new-file.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "10 - Overwrite",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/10-overwrite.js"
+    },
   ]
 }

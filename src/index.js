@@ -1,14 +1,14 @@
 const fs        = require('fs');
 const os        = require('os');
+const path      = require('path');
 const readline  = require('readline');
-const getPads   = require('./utils/get-pads');
-const isMatch   = require('./utils/is-match');
 const bootstrap = require('./bootstrap');
+const _         = require('./utils');
 
 const handleLine = (cache, curLine) => {
   cache.lineCount += 1;
 
-  const matched = isMatch(cache.lines[0], curLine, cache.caseSensitive, cache.matchWhitespace);
+  const matched = _.isMatch(cache.lines[0], curLine, cache.caseSensitive, cache.matchWhitespace);
   if (matched === true) {
     cache.blocks.push({
       start: cache.lineCount,
@@ -28,9 +28,9 @@ const handleLine = (cache, curLine) => {
     .forEach(block => {
       const nextLine = cache.lines[block.lines.length];
 
-      if (isMatch(nextLine, curLine, cache.caseSensitive, cache.matchWhitespace)) {
+      if (_.isMatch(nextLine, curLine, cache.caseSensitive, cache.matchWhitespace)) {
         block.lines.push(curLine);
-        block.pads.push(getPads(curLine));
+        block.pads.push(_.getPads(curLine));
       } else {
         block.invalid = true;
       }
@@ -66,6 +66,8 @@ const finddBlocks = async (filePath, lines, caseSensitive, matchWhitespace) => {
     lineCount : cache.lineCount
   }
 
+  await stream.close();
+
   return result;
 };
 
@@ -98,14 +100,19 @@ const replaceLines = async (sourceFile, destinationFile, blocks, oldLines, newLi
         const prefix  = pad.prefix === 0 ? '' : ''.padStart(pad.prefix, ' ');
         const suffix  = pad.suffix === 0 ? '' : ''.padStart(pad.suffix, ' ');
         const newLine = preserveWhitespace ? (prefix + newLines[i].trim() + suffix) : newLines[i];
-        outStream.write(newLine + os.EOL);
+        await outStream.write(newLine + os.EOL);
+        // console.log(newLine);
       }
 
     } else if (!impacted.includes(lineNumber)) {
-      outStream.write(line + os.EOL);
+      await outStream.write(line + os.EOL);
+      // console.log(line);
     }
 
   }
+
+  await outStream.end();
+  await outStream.close();
 
   return { impacted }
 };
@@ -119,15 +126,39 @@ module.exports = async (opts) => {
     throw errObject;
   }
 
-  const { sourceFile, destinationFile, oldLines, newLines } = opts;
+  const tempFilePath = _.isFile(opts.destinationFile)
+    ? path.join(opts.tempDir, `${_.getBlockdate()}.flr`)
+    : opts.destinationFile;
 
-  const caseSensitive       = (opts.caseSensitive === true);
-  const matchWhitespace     = (opts.matchWhitespace === true);
-  const preserveWhitespace  = (opts.preserveWhitespace === true);
-  const overwrite           = (opts.overwrite === true);
-    
-  const { blocks } = await finddBlocks(sourceFile, oldLines, caseSensitive, matchWhitespace);
-  const result = await replaceLines(sourceFile, destinationFile, blocks, oldLines, newLines, preserveWhitespace);
+  const { blocks } = await finddBlocks(
+    opts.sourceFile, 
+    opts.oldLines, 
+    (opts.caseSensitive === true), 
+    (opts.matchWhitespace === true)
+  );
 
-  return result;
+  const { impacted } = await replaceLines(
+    opts.sourceFile, 
+    tempFilePath, 
+    blocks, 
+    opts.oldLines, 
+    opts.newLines, 
+    (opts.preserveWhitespace === true)
+  );
+
+
+  if (impacted.length === 0) {
+    _.deleteFile(tempFilePath);
+    return impacted;
+  }
+  if (tempFilePath === opts.destinationFile) {
+    return impacted;
+  }
+  _.copyContents(tempFilePath, opts.destinationFile);
+  _.deleteFile(tempFilePath);
+
+  console.log(path.dirname(tempFilePath));
+  console.log(tempFilePath);
+
+  return impacted;
 }
