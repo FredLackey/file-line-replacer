@@ -7,6 +7,10 @@ module.exports = async (opts) => {
   if (_.isSet(opts.makeDirs) && !_.isBoolean(opts.makeDirs)) { return { id: 1, message: 'Make directory flag is not a valid format.' }; }
   opts.makeDirs = _.isBoolean(opts.makeDirs) ? opts.makeDirs : true;
 
+  if (_.isSet(opts.backupDirDate) && !_.isBoolean(opts.backupDirDate)) { return { id: 2, message: 'Backup dir date flag is not a valid format.' }; }
+  opts.backupDirDate = _.isBoolean(opts.backupDirDate) ? opts.backupDirDate : true;
+
+
   if (!_.isSet(opts.sourceFile)) { return { id: 10, message: 'Source file must be supplied.' }; }
   if (!_.isValidString(opts.sourceFile)) { return { id: 11, message: 'Source file is not a valid path.' }; }
   if (!_.isFile(opts.sourceFile)) { return { id: 12, message: 'Source file does not exist.' }; }
@@ -104,7 +108,7 @@ module.exports = async (opts) => {
   if (!_.isDirectory(opts.tempDir) && !_.makePath(opts.tempDir)) { return { id: 161, message: 'Temp folder does could not be created.' }; }
   if (_.isSet(opts.backupDir) && _.isFile(opts.destinationFile)) {
     if (!_.isDirectory(opts.backupDir) && !_.makePath(opts.backupDir)) { return { id: 162, message: 'Backup folder does could not be created.' }; }
-    opts.backupDirFull = path.join(opts.backupDir, _.getBlockdate().substr(0, 14))
+    opts.backupDirFull = opts.backupDirDate ? path.join(opts.backupDir, _.getBlockdate().substr(0, 14)) : opts.backupDir;
     if (!_.makePath(opts.backupDirFull)) { return { id: 163, message: 'Backup folder length is too long.' }; }
     if (_.isFile(path.join(opts.backupDirFull, path.basename(opts.destinationFile)))) { return { id: 164, message: 'Backup file cannot be overwritten.' }; }
   }

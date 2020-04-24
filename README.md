@@ -14,6 +14,7 @@ const replacer = require('file-line-replacer');
 
 const results = replacer({
   sourceFile  : '/Volumes/Source/my-project/models/cat.model.js',
+  backupDir   : '/Volumes/Source/my-project/_backup/models/,
   oldLines : [
     'type: DataTypes.INTEGER.UNSIGNED,',
     'allowNull: false,',
@@ -37,6 +38,7 @@ const results = replacer({
 | `destinationFile` |  | Optional file path if changes should be written to a new file. |
 | `tempDir` |  | Optional directory path to use while generating the new file. |
 | `backupDir` |  | Optional directory to store original files before altering. |
+| `backupDirDate` | `true` | Creates a timestamp subdirectory within the `backupDir`.  |
 | `makeDirs` | `true` | Creates the `tempDir` and folder for `destinationFile` if it does not exist.  |
 | `oldLines` |  |  Alternative to `oldLinesFile`.  Array of specific lines to search for and replace. |
 | `oldLineFile` |  |  Alternative to `oldLines`.  Test file containing lines to search for an replace.  |
@@ -58,3 +60,4 @@ const results = replacer({
 |  | `v0.0.1` |  Create README just in case someone finds the repo before it's ready.  |
 | `2020-04-23` | `v0.1.0` |  _WIP_  Added overwrite and custom `tempDir` functionality.  |
 | `2020-04-24` | `v0.2.0` |  _WIP_  Added `backupDir` & `makeDirs` functionality.  |
+|  | `v0.2.1` |  _WIP_  Added `backupDirDate` functionality.  |
