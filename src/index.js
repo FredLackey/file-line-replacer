@@ -126,7 +126,9 @@ module.exports = async (opts) => {
     throw errObject;
   }
 
-  const tempFilePath = _.isFile(opts.destinationFile)
+  const isOverwrite = _.isFile(opts.destinationFile);
+
+  const tempFilePath = isOverwrite
     ? path.join(opts.tempDir, `${_.getBlockdate()}.flr`)
     : opts.destinationFile;
 
@@ -136,6 +138,14 @@ module.exports = async (opts) => {
     (opts.caseSensitive === true), 
     (opts.matchWhitespace === true)
   );
+
+  if (_.isSet(opts.backupDirFull) && isOverwrite) {
+    const backupFile = path.join(opts.backupDirFull, path.basename(opts.destinationFile));
+    await _.copyContents(opts.sourceFile, backupFile);
+    if (!_.isFile(backupFile)) {
+      throw new Error('Original file could not be backed up.');
+    }
+  }
 
   const { impacted } = await replaceLines(
     opts.sourceFile, 

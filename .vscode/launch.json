@@ -94,5 +94,14 @@
       ],
       "program": "${workspaceFolder}/_tests/10-overwrite.js"
     },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "11 - Backups",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/_tests/11-backups.js"
+    },
   ]
 }

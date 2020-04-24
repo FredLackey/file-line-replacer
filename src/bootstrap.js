@@ -4,6 +4,9 @@ const _ = require('./utils');
 
 module.exports = async (opts) => {
 
+  if (_.isSet(opts.makeDirs) && !_.isBoolean(opts.makeDirs)) { return { id: 1, message: 'Make directory flag is not a valid format.' }; }
+  opts.makeDirs = _.isBoolean(opts.makeDirs) ? opts.makeDirs : true;
+
   if (!_.isSet(opts.sourceFile)) { return { id: 10, message: 'Source file must be supplied.' }; }
   if (!_.isValidString(opts.sourceFile)) { return { id: 11, message: 'Source file is not a valid path.' }; }
   if (!_.isFile(opts.sourceFile)) { return { id: 12, message: 'Source file does not exist.' }; }
@@ -12,7 +15,7 @@ module.exports = async (opts) => {
     if (!_.isValidString(opts.destinationFile)) { return { id: 20, message: 'Destination file not a valid path format.' }; }
     if (opts.sourceFile !== opts.destinationFile) {
       if (_.isFile(opts.destinationFile) && !opts.overwrite) { return { id: 21, message: 'Destination file already exists.' }; }
-      if (!_.isDirectory(path.dirname(opts.destinationFile))) { return { id: 22, message: 'Destination folder does not exist.' }; }
+      if (!_.isDirectory(path.dirname(opts.destinationFile)) && !opts.makeDirs) { return { id: 22, message: 'Destination folder does not exist.' }; }
     }
   } else {
     opts.destinationFile = opts.sourceFile;
@@ -87,9 +90,23 @@ module.exports = async (opts) => {
 
   if (_.isSet(opts.tempDir)) {
     if (!_.isValidString(opts.tempDir)) { return { id: 150, message: 'Temp folder not a valid path format.' }; }
-    if (!_.isDirectory(opts.tempDir)) { return { id: 151, message: 'Temp folder does not exist.' }; }
+    if (!_.isDirectory(opts.tempDir) && !opts.makeDirs) { return { id: 151, message: 'Temp folder does not exist.' }; }
   } else {
     opts.tempDir = os.tmpdir();
+  }
+
+  if (_.isSet(opts.backupDir) && _.isFile(opts.destinationFile)) {
+    if (!_.isValidString(opts.backupDir)) { return { id: 170, message: 'Backup folder not a valid path format.' }; }
+    if (!_.isDirectory(opts.backupDir) && !opts.makeDirs) { return { id: 171, message: 'Backup folder does not exist.' }; }
+  }  
+
+  if (!_.isDirectory(path.dirname(opts.destinationFile)) && !_.makePath(path.dirname(opts.destinationFile))) { return { id: 160, message: 'Destination folder could not be created.' }; }
+  if (!_.isDirectory(opts.tempDir) && !_.makePath(opts.tempDir)) { return { id: 161, message: 'Temp folder does could not be created.' }; }
+  if (_.isSet(opts.backupDir) && _.isFile(opts.destinationFile)) {
+    if (!_.isDirectory(opts.backupDir) && !_.makePath(opts.backupDir)) { return { id: 162, message: 'Backup folder does could not be created.' }; }
+    opts.backupDirFull = path.join(opts.backupDir, _.getBlockdate().substr(0, 14))
+    if (!_.makePath(opts.backupDirFull)) { return { id: 163, message: 'Backup folder length is too long.' }; }
+    if (_.isFile(path.join(opts.backupDirFull, path.basename(opts.destinationFile)))) { return { id: 164, message: 'Backup file cannot be overwritten.' }; }
   }
 
   return undefined;
