@@ -1,5 +1,10 @@
-# file-line-replacer
-Node-based file line replacer.
+# File Line Replacer for NodeJS
+
+**A command line version is available!**  
+This utility may be used from the command line by installing the CLI [`file-line-replacer-cli`](https://github.com/FredLackey/file-line-replacer).  For more information on that project, please visit: [https://github.com/FredLackey/file-line-replacer](https://github.com/FredLackey/file-line-replacer)
+
+## Purpose  
+Matches multiple lines within large text files and replaces those lines with another set of lines while optionally preserving whitespace.  Both the old and new sets of lines may be passed in or read from a file.  Of course, the original file may be automatically backed up, if desired.
 
 ## Installation
 
