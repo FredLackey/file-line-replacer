@@ -49,7 +49,7 @@ const results = replacer({
 | `oldLineFile` |  |  Alternative to `oldLines`.  Test file containing lines to search for an replace.  |
 | `newLines` |  |  Alternative to `newLinesFile`.  Array of specific lines to write to destination file. |
 | `newLineFile` |  |  Alternative to `newLines`.  Test file containing lines to write to destination file.  |
-| `emptyLines` | `false` |  Equivilent to setting both `emptyLinesNew` and `emptyLinesFalse`. |
+| `emptyLines` | `false` |  Equivilent to setting both `emptyLinesNew` and `emptyLinesOld`. |
 | `emptyLinesNew` | `false` | Preserves empty lines at head and tail of new lines array or file. |
 | `emptyLinesOld` | `false` | Preserves empty lines at head and tail of old lines array or file. |
 | `caseSensitive` | `false` | Forces a case-sensitive search on source file. |
