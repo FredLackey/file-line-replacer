@@ -12,7 +12,7 @@ npm i -g file-line-replacer
 ```
 
 ## Usage
-
+Tweak a _single_ file ... 
 ```
 file-line-replacer \
   --source-file "/Volumes/Source/my-project/models/cat.model.js" \
@@ -20,7 +20,7 @@ file-line-replacer \
   --new-lines "autoIncrement: true,|primaryKey: true" \
   --overwrite
 ```
-
+... or, search _entire directories_ for eligible files ... 
 ```
 file-line-replacer \
   --search-dir "/Users/flackey/my-project/src/data/models" \
