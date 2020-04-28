@@ -1,6 +1,6 @@
 {
   "name": "file-line-replacer",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Replaces multiple lines within large text files.",
   "main": "src/index.js",
   "preferGlobal": true,
