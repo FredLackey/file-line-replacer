@@ -1,127 +1,45 @@
 #!/usr/bin/env node
 
-const _ = require('./utils');
+const _           = require('./utils');
+const options     = require('./options');
+const { replace } = require('./index');
 
-const { argv } = require('yargs')
-  .group([
-    'search-dir',
-    'search-pattern',
-    'ignore-pattern',
-    'ignore-patterns-file',
-    'destination-dir'
-  ], 'Just for Multiple Files:')
-  .group([
-    'source-file',
-    'destination-file',
-  ], 'Just for Single Files:')
-  .group([
-    'old-lines',
-    'old-lines-file',
-    'new-lines',
-    'new-lines-file',
-    'delimiter',
-    'empty-lines',
-    'empty-lines-new',
-    'empty-lines-old',
-  ], 'Specifying Changes:')
-  .group([
-    'case-sensitive',
-    'match-whitespace',
-    'preserve-whitespace',
-    'overwrite',
-  ], 'File Handling:')
-  .group([
-    'temp-dir',
-    'backup-dir',
-    'backup-dir-date',
-    'make-dirs',
-  ], 'Directory-Related Stuff:')
+const { argv } = require('yargs').options(options.formatters.toYargs());
 
-  .options({
-    'search-dir': {
-      describe: 'Folder to search'
-    },
-    'search-pattern': {
-      describe: 'Glob pattern to search'
-    },
-    'ignore-pattern': {
-      describe: 'Glob pattern to ignore'
-    },
-    'ignore-patterns-file': {
-      describe: 'File containing glob patterns to ignore'
-    },
-    'destination-dir': {
-      describe: 'Folder path to store altered files'
-    },
+const main = async () => {
 
-    'source-file': {
-      describe: 'File containing lines of text to replace.'
-    },
-    'destination-file': {
-      describe: 'Optional file path if changes should be written to a new file.'
-    },
+  const opts = {};
+  Object.keys(argv)
+    .filter(_.isAlphanumeric)
+    .forEach(key => {
+      opts[key] = argv[key];
+    });
 
-    'old-lines': {
-      describe: 'Alternative to --old-lines-file.  Line to search for and replace'
-    },
-    'old-lines-file': {
-      describe: 'Alternative to --old-lines.  Line to search for and replace'
-    },
-    'new-lines': {
-      describe: 'Alternative to --new-lines-file.  Array of lines to write to destination file'
-    },
-    'new-lines-file': {
-      describe: 'Alternative to --new-lines.  Text file containing lines to write to destination file.'
-    },
-    delimiter: {
-      describe: 'Characters used within --old-lines and --new-lines to split into mulitple lines'
-    },
-    'empty-lines': {
-      describe: 'Sets --empty-lines-new & --empty-lines-old.'
-    },
-    'empty-lines-new': {
-      describe: 'Preserves empty lines at head and tail of new lines array or file.'
-    },
-    'empty-lines-old': {
-      describe: 'Preserves empty lines at head and tail of old lines array or file.'
-    },
+  if (_.isSet(opts.markdown) || _.isSet(opts.cliMarkdown) || _.isSet(opts.markdownCli)) {
+    const lines = options.formatters.toMarkdown(_.isSet(opts.cliMarkdown) || _.isSet(opts.markdownCli));
+    lines.forEach(line => {
+      console.log(line);
+    });
+    return;
+  }
 
+  const { files, errors } = await replace(opts);
+  const hasErrors = _.isValidArray(errors);
+  const hasSuccess = _.isValidArray(files) && files.filter(x => (x && x.success === true)).length > 0;
+  if (hasErrors) {
+    errors.forEach(err => {
+      console.error(`Error: ${err}`);
+    });
+  }
+  if (hasSuccess) {
+    files.filter(file => (file && file.success)).forEach(file => {
+      console.info(file.out);
+    });
+  }
+  if (!hasErrors && !hasSuccess) {
+    console.info('Nothing to do.');
+  }
+};
 
-    'case-sensitive': {
-      describe: 'Forces a case-sensitive search on source file.'
-    },
-    'match-whitespace': {
-      describe: 'Inlude whitespace when examining source file.'
-    },
-    'preserve-whitespace': {
-      describe: 'Preserve whitespace at beginning and end of replaced line.'
-    },
-    overwrite: {
-      describe: 'Allows the destination file to be overwritten if it exists.'
-    },
+main();
 
-
-
-    'temp-dir': {
-      describe: 'Optional directory to use when generating files.'
-    },
-    'backup-dir': {
-      describe: 'Optional directory to store original files before altering.'
-    },
-    'backup-dir-date': {
-      describe: 'Create a timestamp subdirectory within the backup directory.'
-    },
-    'make-dirs': {
-      describe: 'Creates the temp and destination folders if needed.'
-    },
-
-  });
-
-const params = {};
-Object.keys(argv)
-  .filter(_.isAlphanumeric)
-  .forEach(key => {
-    params[key] = argv[key];
-  });
-
-console.log(JSON.stringify(params, null, 2));

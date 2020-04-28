@@ -7,113 +7,37 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "A01 - Arrays",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/01-arrays.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A02 - Keep Whitespace",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/02-keep-whitespace.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A03 - Case Sensitive",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/03-case-sensitive.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A04 - Match Whitespace (Bad)",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/04-match-whitespace-bad.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A05 - Match Whitespace (Good)",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/05-match-whitespace-good.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A06 - Match Complete",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/06-match-complete.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A07 - New Lines File",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/07-new-lines-file.js"
-    },    
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A08 - New Lines File (Preserve)",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/08-new-lines-file-preserve.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A09 - New File",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/09-new-file.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A10 - Overwrite",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/10-overwrite.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "A11 - Backups",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}/_tests/11-backups.js"
-    },
-
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "CLI 00 - Help",
+      "name": "Print Markdown",
       "skipFiles": [
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/src/command.js",
       "args": [
-        "--help"
+        "--markdown"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Print Markdown for CLI",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": [
+        "--markdown-cli"
+      ]
+    },
+
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 00 - Empty",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": [
       ]
     },
     {
@@ -125,47 +49,53 @@
       ],
       "program": "${workspaceFolder}/src/command.js",
       "args": [
-        "--make-dirs"
+        "--search-dir",
+        "/Users/flackey/Source/GitHub/FredLackey/file-line-replacer/samples",
       ]
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "CLI 02 - Simple",
+      "name": "CLI 02 - Sample File + Line",
       "skipFiles": [
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/src/command.js",
       "args": [
+        "--backup-dir",
+        "/Users/flackey/Source/GitHub/FredLackey/file-line-replacer/samples/.env.test/backups",
         "--source-file",
-        "/Volumes/Source/my-project/models/cat.model.js",
+        "/Users/flackey/Source/GitHub/FredLackey/file-line-replacer/samples/sample-model.js",
         "--old-lines",
         "allowNull: false,|primaryKey: true",
         "--new-lines",
         "autoIncrement: true,|primaryKey: true",
-        "--overwrite"
+        "--overwrite",
       ]
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "CLI 03 - Extended",
+      "name": "CLI 03 - Search + Line",
       "skipFiles": [
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/src/command.js",
       "args": [
-        "--source-file",
-        "/Volumes/Source/my-project/models/cat.model.js",
-        "--backup-file",
-        "/Volumes/Source/my-project/_backup/models/",
-        "--old-lines-file",
-        "/Volumes/Source/my-project/_templates/auto-increment-old.txt",
-        "--new-lines-file",
-        "/Volumes/Source/my-project/_templates/auto-increment-old.txt",
+        "--backup-dir",
+        "/Users/flackey/Source/GitHub/FredLackey/file-line-replacer/.env.test/backups",
+        "--search-dir",
+        "/Users/flackey/Source/GitHub/FredLackey/file-line-replacer/samples",
+        "--destination-dir",
+        "/Users/flackey/Source/GitHub/FredLackey/file-line-replacer/.env.test",
+        "--search-patterns",
+        "**/*.js",
+        "--old-lines",
+        "allowNull: false,|primaryKey: true",
+        "--new-lines",
+        "autoIncrement: true,|primaryKey: true",
         "--overwrite",
-        "--preserve-whitespace"
       ]
     },
-  ]
+ ]
 }

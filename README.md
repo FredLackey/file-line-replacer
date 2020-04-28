@@ -18,7 +18,7 @@ file-line-replacer \
   --source-file "/Volumes/Source/my-project/models/cat.model.js" \
   --old-lines "allowNull: false,|primaryKey: true"
   --new-lines "autoIncrement: true,|primaryKey: true" \
-  --overwrite \
+  --overwrite
 ```
 
 ```
@@ -31,43 +31,36 @@ file-line-replacer \
   --preserve-whitespace
 ```
 
-### Options
-There are two main ways to use this package.  You may either *search* for files to replace _or_ you may specify a file to search.
-
-#### Options for Searching Multiple Files  
-|  Property  |  Default  |  Details  |
-|------------|-----------|-----------|
-| `--search-dir` |  |  File containing lines of text to replace.  |
-| `--search-pattern` | `**/*.*` |  File containing lines of text to replace.  |
-| `--ingore-pattern` |  |  File containing lines of text to replace.  |
-| `--ingore-patterns-file` |  |  File containing lines of text to replace.  |
-| `--destination-dir` |  | Optional file path if changes should be written to a new file. |
-
-#### Options for Searching a Single File  
-|  Property  |  Default  |  Details  |
-|------------|-----------|-----------|
-| `--source-file` |  |  File containing lines of text to replace.  |
-| `--destination-file` |  | Optional file path if changes should be written to a new file. |
-
-#### Common Options
-|  Property  |  Default  |  Details  |
-|------------|-----------|-----------|
-| `--temp-dir` |  | Optional directory path to use while generating the new file. |
-| `--backup-dir` |  | Optional directory to store original files before altering. |
-| `--backup-dir-date` | `true` | Creates a timestamp subdirectory within the `backupDir`.  |
-| `--make-dirs` | `true` | Creates the `tempDir` and folder for `destinationFile` if it does not exist.  |
-| `--old-lines` |  |  Alternative to `--old-lines-file`. Line to search for and replace. |
-| `--old-lines-file` |  |  Alternative to `--old-lines`.  Test file containing lines to search for and replace.  |
-| `--new-lines` |  |  Alternative to `--new-lines-file`.  Array of specific lines to write to destination file. |
-| `--new-lines-file` |  |  Alternative to `--new-lines`.  Test file containing lines to write to destination file.  |
-| `--delimiter` | `|` |  Characters used within `--old-lines` and `--new-lines` to split value into multiple lines.  |
-| `--empty-lines` | `false` |  Equivilent to setting both `--empty-lines-new` and `--empty-lines-old`. |
-| `--empty-lines-new` | `false` | Preserves empty lines at head and tail of new lines array or file. |
-| `--empty-lines-false` | `false` | Preserves empty lines at head and tail of old lines array or file. |
-| `--case-sensitive` | `false` | Forces a case-sensitive search on source file. |
-| `--match-whitespace` | `false` | Forces the whitespace to be included when examining lines of the file. |
-| `--preserve-whitespace` | `false` | Attempts to preserve the white space at the start and end of each line.  |
-| `--overwrite` | `false` | Allows the destination file to be overwritten if it exists.  Required if the `--destination-file` already exists and when overwriting the `--source-file`. |
+### Parameters
+| Name                        | Description                             | Type                | Default      |
+|-----------------------------|-----------------------------------------|---------------------|--------------|
+| `backup-dir`                | Backup Directory                        | `string (path)`     |              |
+| `backup-dir-date`           | Append Date Flag for Backup Directory   | `boolean`           | `true`       |
+| `case-sensitive`            | Case Sensitive Flag                     | `boolean`           | `false`      |
+| `delimiter`                 | Delimeter Character(s)                  |                     | `|`          |
+| `destination-dir`           | Destination Directory                   | `string (path)`     | `(function)` |
+| `destination-file`          | Destination File                        | `string (path)`     | `(function)` |
+| `empty-lines`               | Preserve Empty Lines Flag               | `boolean`           | `false`      |
+| `empty-lines-new`           | Preserve Empty for New Files Lines Flag | `boolean`           | `(function)` |
+| `empty-lines-old`           | Preserve Empty for Old Files Lines Flag | `boolean`           | `(function)` |
+| `ignore-patterns`           | Ignore Pattern(s)                       | `string | string[]` |              |
+| `ignore-patterns-delimiter` | Ignore Patterns Delimeter               |                     | `(function)` |
+| `ignore-patterns-file`      | Ignore Patterns File                    | `string (path)`     |              |
+| `make-dirs`                 | Make Directories Flag                   | `boolean`           | `true`       |
+| `match-whitespace`          | Match Whitespace Flag                   | `boolean`           | `false`      |
+| `new-lines`                 | New Line(s)                             | `string | string[]` |              |
+| `new-lines-delimiter`       | New Lines Delimeter                     |                     | `(function)` |
+| `new-lines-file`            | New Lines File                          | `string (path)`     |              |
+| `old-lines`                 | Old Line(s)                             | `string | string[]` |              |
+| `old-lines-delimiter`       | Old Lines Delimeter                     |                     | `(function)` |
+| `old-lines-file`            | Old Lines File                          | `string (path)`     |              |
+| `overwrite`                 | Overwrite Files Flag                    | `boolean`           | `false`      |
+| `preserve-whitespace`       | Preserve Whitespace Flag                | `boolean`           | `true`       |
+| `search-dir`                | Search Directory                        | `string (path)`     |              |
+| `search-patterns`           | Search Pattern(s)                       |                     |              |
+| `search-patterns-file`      | Search Patterns File                    | `string (path)`     |              |
+| `source-file`               | Source File                             | `string (path)`     |              |
+| `temp-dir`                  | Custom Temp Directory                   | `string (path)`     | `(function)` |
 
 ### Contact  
 Please feel free to contact me directly with any questions, comments, or enhancement requests:

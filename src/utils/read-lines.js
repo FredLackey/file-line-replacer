@@ -5,7 +5,7 @@ const readLines = async (filePath) => {
   const lines = [];
   try {
     const stream  = fs.createReadStream(filePath);
-    const file    = await readline.createInterface({
+    const file    = readline.createInterface({
       input: stream,
       crlfDelay: Infinity
     });

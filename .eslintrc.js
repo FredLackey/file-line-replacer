@@ -37,6 +37,7 @@ module.exports = {
     "no-underscore-dangle": "off",
     "no-unused-vars": "off",
     "object-curly-newline": "off",
+    "object-property-newline": "off",
     "operator-linebreak": "off",
     "padded-blocks": "off",
     "space-before-function-paren": "off"

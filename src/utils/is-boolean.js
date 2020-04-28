@@ -1,5 +1,11 @@
+const isSet = require('./is-set');
+
 const isBoolean = value => {
   return (value === true) || (value === false);
 };
 
-module.exports = isBoolean;
+const isBooleanIfSet = value => {
+  return !isSet(value) || isBoolean(value);
+};
+
+module.exports = { isBoolean, isBooleanIfSet };

@@ -14,9 +14,9 @@ npm i file-line-replacer
 ## Usage
 
 ```
-const replacer = require('file-line-replacer');
+const flr = require('file-line-replacer');
 
-const results = replacer({
+const results = await flr.replace({
   sourceFile  : '/Volumes/Source/my-project/models/cat.model.js',
   backupDir   : '/Volumes/Source/my-project/_backup/models/,
   oldLines : [
@@ -36,25 +36,35 @@ const results = replacer({
 
 ### Options
 
-|  Property  |  Default  |  Details  |
-|------------|-----------|-----------|
-| `sourceFile` |  |  File containing lines of text to replace.  |
-| `destinationFile` |  | Optional file path if changes should be written to a new file. |
-| `tempDir` |  | Optional directory path to use while generating the new file. |
-| `backupDir` |  | Optional directory to store original files before altering. |
-| `backupDirDate` | `true` | Creates a timestamp subdirectory within the `backupDir`.  |
-| `makeDirs` | `true` | Creates the `tempDir` and folder for `destinationFile` if it does not exist.  |
-| `oldLines` |  |  Alternative to `oldLinesFile`.  Array of specific lines to search for and replace. |
-| `oldLineFile` |  |  Alternative to `oldLines`.  Test file containing lines to search for and replace.  |
-| `newLines` |  |  Alternative to `newLinesFile`.  Array of specific lines to write to destination file. |
-| `newLineFile` |  |  Alternative to `newLines`.  Test file containing lines to write to destination file.  |
-| `emptyLines` | `false` |  Equivilent to setting both `emptyLinesNew` and `emptyLinesOld`. |
-| `emptyLinesNew` | `false` | Preserves empty lines at head and tail of new lines array or file. |
-| `emptyLinesOld` | `false` | Preserves empty lines at head and tail of old lines array or file. |
-| `caseSensitive` | `false` | Forces a case-sensitive search on source file. |
-| `matchWhitespace` | `false` | Forces the whitespace to be included when examining lines of the file. |
-| `preserveWhitespace` | `false` | Attempts to preserve the white space at the start and end of each line.  |
-| `overwrite` | `false` | Allows the destination file to be overwritten if it exists.  Required if the `destinationFile` already exists and when overwriting the `sourceFile`. |
+| Name                      | Description                             | Type                | Default      |
+|---------------------------|-----------------------------------------|---------------------|--------------|
+| `backupDir`               | Backup Directory                        | `string (path)`     |              |
+| `backupDirDate`           | Append Date Flag for Backup Directory   | `boolean`           | `true`       |
+| `caseSensitive`           | Case Sensitive Flag                     | `boolean`           | `false`      |
+| `delimiter`               | Delimeter Character(s)                  |                     | `|`          |
+| `destinationDir`          | Destination Directory                   | `string (path)`     | `(function)` |
+| `destinationFile`         | Destination File                        | `string (path)`     | `(function)` |
+| `emptyLines`              | Preserve Empty Lines Flag               | `boolean`           | `false`      |
+| `emptyLinesNew`           | Preserve Empty for New Files Lines Flag | `boolean`           | `(function)` |
+| `emptyLinesOld`           | Preserve Empty for Old Files Lines Flag | `boolean`           | `(function)` |
+| `ignorePatterns`          | Ignore Pattern(s)                       | `string | string[]` |              |
+| `ignorePatternsDelimiter` | Ignore Patterns Delimeter               |                     | `(function)` |
+| `ignorePatternsFile`      | Ignore Patterns File                    | `string (path)`     |              |
+| `makeDirs`                | Make Directories Flag                   | `boolean`           | `true`       |
+| `matchWhitespace`         | Match Whitespace Flag                   | `boolean`           | `false`      |
+| `newLines`                | New Line(s)                             | `string | string[]` |              |
+| `newLinesDelimiter`       | New Lines Delimeter                     |                     | `(function)` |
+| `newLinesFile`            | New Lines File                          | `string (path)`     |              |
+| `oldLines`                | Old Line(s)                             | `string | string[]` |              |
+| `oldLinesDelimiter`       | Old Lines Delimeter                     |                     | `(function)` |
+| `oldLinesFile`            | Old Lines File                          | `string (path)`     |              |
+| `overwrite`               | Overwrite Files Flag                    | `boolean`           | `false`      |
+| `preserveWhitespace`      | Preserve Whitespace Flag                | `boolean`           | `true`       |
+| `searchDir`               | Search Directory                        | `string (path)`     |              |
+| `searchPatterns`          | Search Pattern(s)                       |                     |              |
+| `searchPatternsFile`      | Search Patterns File                    | `string (path)`     |              |
+| `sourceFile`              | Source File                             | `string (path)`     |              |
+| `tempDir`                 | Custom Temp Directory                   | `string (path)`     | `(function)` |
 
 ### Contact  
 Please feel free to contact me directly with any questions, comments, or enhancement requests:
