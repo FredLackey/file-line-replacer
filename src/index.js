@@ -18,6 +18,7 @@ module.exports.replace = async (opts) => {
   errors = _.isValidArray(errors) ? errors : options.steps.preventOverwrite(opts);
 
   errors = _.isValidArray(errors) ? errors : await processing.searchFiles(opts);
+  errors = _.isValidArray(errors) ? errors : await processing.makeDirs(opts);
   errors = _.isValidArray(errors) ? errors : await processing.backupFiles(opts);
   errors = _.isValidArray(errors) ? errors : await processing.replaceLines(opts);
 
