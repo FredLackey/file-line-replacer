@@ -23,12 +23,11 @@ file-line-replacer \
 
 ```
 file-line-replacer \
-  --source-file "/Volumes/Source/my-project/models/cat.model.js" \
-  --backup-dir "/Volumes/Source/my-project/_backup/models/
-  --old-lines-file "/Volumes/Source/my-project/_templates/auto-increment-old.txt"
-  --new-lines-file "/Volumes/Source/my-project/_templates/auto-increment-old.txt" \
-  --overwrite \
-  --preserve-whitespace
+  --search-dir "/Users/flackey/Source/aws/res-useragent-data-api/src/data/models" \
+  --backup-dir "/Users/flackey/Source/aws/res-useragent-data-api/_backup" \
+  --old-lines "type: DataTypes.INTEGER.UNSIGNED,|allowNull: false,|primaryKey: true" \
+  --new-lines "type: DataTypes.INTEGER.UNSIGNED,|autoIncrement: true,|primaryKey: true" \
+  --overwrite
 ```
 
 ### Parameters
