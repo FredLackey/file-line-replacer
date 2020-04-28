@@ -26,6 +26,7 @@ const main = async () => {
   const { files, errors } = await replace(opts);
   const hasErrors = _.isValidArray(errors);
   const hasSuccess = _.isValidArray(files) && files.filter(x => (x && x.success === true)).length > 0;
+
   if (hasErrors) {
     errors.forEach(err => {
       console.error(`Error: ${err}`);

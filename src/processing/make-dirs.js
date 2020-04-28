@@ -15,6 +15,18 @@ const makePaths = async (opts) => {
     return ['Backup directories could not be created.'];
   }
     
+  const badTemp = _.unique(opts._files
+    .filter(file => (_.isValidString(file.temp)))
+    .map(file => (path.dirname(file.temp))))
+    .filter(dir => (!_.makePath(dir)));
+
+  if (badTemp.length === 1) {
+    return ['Temp directory could not be created.'];
+  }
+  if (badTemp.length > 1) {
+    return ['Temp directories could not be created.'];
+  }
+    
   const badSave = _.unique(opts._files
     .filter(file => (_.isValidString(file.save)))
     .map(file => (path.dirname(file.save))))

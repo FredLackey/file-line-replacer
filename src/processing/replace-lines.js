@@ -47,26 +47,46 @@ const processFile = async (sourceFile, destinationFile, blocks, oldLines, newLin
   return { impacted }
 };
 
+const copyTempContents = async (tempFile, destFile) => {
+  try {
+    await _.copyContents(tempFile, destFile);
+    return true;
+  } catch (ex) {
+    return false;
+  }
+}
+
 const replaceLines = async (opts) => {
 
   const files = opts._files.filter(file => (_.isSet(file.out) && _.isValidArray(file.blocks)));
 
   for (let i = 0; i < files.length; i += 1) {
 
-    const { in: sourceFile, out: destinationFile, blocks } = files[i];
+    const { in: sourceFile, out: destinationFile, temp: tempFile, blocks } = files[i];
     const { oldLines, newLines, preserveWhitespace } = opts;
-  
+
+    // console.log(tempFile);
+    // console.log(destinationFile);
+
     try {
-      const { impacted } = await processFile(sourceFile, destinationFile, blocks, oldLines, newLines, preserveWhitespace);
+      const { impacted } = await processFile(sourceFile, tempFile, blocks, oldLines, newLines, preserveWhitespace);
       if (!_.isValidArray(impacted)) {
         files[i].error = 'Unexpected result replacing lines.';
-      } else {
-        files[i].success = true;
+        continue;
       }
     } catch (ex) {
       files[i].error = 'Problem replacing lines.';
+      continue;
     }
 
+    const copied = await copyTempContents(tempFile, destinationFile);
+    if (!copied) {
+      files[i].error = 'Problem copying temp file to destination.';
+      continue;
+    }
+
+    files[i].success = true;
+    _.deleteFile(tempFile);
   }
 
   return (files.filter(file => (_.isValidString(file.error))).length === 0)

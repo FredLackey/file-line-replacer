@@ -21,6 +21,7 @@ module.exports.replace = async (opts) => {
   errors = _.isValidArray(errors) ? errors : await processing.makeDirs(opts);
   errors = _.isValidArray(errors) ? errors : await processing.backupFiles(opts);
   errors = _.isValidArray(errors) ? errors : await processing.replaceLines(opts);
+  errors = _.isValidArray(errors) ? errors : await processing.writeLog(opts);
 
   errors = _.unique(errors);
 

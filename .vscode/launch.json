@@ -97,6 +97,7 @@
         "--overwrite",
       ]
     },
+
     {
       "type": "node",
       "request": "launch",
@@ -119,5 +120,27 @@
         "--overwrite",
       ]
     },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 05 - Sequelizer (Overwrite)",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": [
+        "--backup-dir",
+        "/Users/flackey/Source/aws/res-useragent-data-api/_backup",
+        "--search-dir",
+        "/Users/flackey/Source/aws/res-useragent-data-api/src/data/models",
+        "--old-lines",
+        "allowNull: false,|primaryKey: true",
+        "--new-lines",
+        "autoIncrement: true,|primaryKey: true",
+        "--overwrite",
+      ]
+    },
+
+
  ]
 }

@@ -24,6 +24,7 @@ module.exports = {
     "key-spacing": "off",
     "linebreak-style": "off",
     "max-len": "off",
+    "no-await-in-loop": "off",
     "no-console": "off",
     "no-continue": "off",
     "no-lonely-if": "off",
