@@ -23,10 +23,10 @@ file-line-replacer \
 
 ```
 file-line-replacer \
-  --search-dir "/Users/flackey/Source/aws/res-useragent-data-api/src/data/models" \
-  --backup-dir "/Users/flackey/Source/aws/res-useragent-data-api/_backup" \
-  --old-lines "type: DataTypes.INTEGER.UNSIGNED,|allowNull: false,|primaryKey: true" \
-  --new-lines "type: DataTypes.INTEGER.UNSIGNED,|autoIncrement: true,|primaryKey: true" \
+  --search-dir "/Users/flackey/my-project/src/data/models" \
+  --backup-dir "/Users/flackey/my-project/_backup" \
+  --old-lines "allowNull: false,|primaryKey: true" \
+  --new-lines "autoIncrement: true,|primaryKey: true" \
   --overwrite
 ```
 
