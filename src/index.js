@@ -7,6 +7,7 @@ module.exports.replace = async (opts) => {
   let errors = [];
 
   errors = _.isValidArray(errors) ? errors : options.steps.unknowns(opts);
+  errors = _.isValidArray(errors) ? errors : options.steps.cleanDirs(opts);
   errors = _.isValidArray(errors) ? errors : options.steps.setDefaults(opts);
   errors = _.isValidArray(errors) ? errors : options.steps.splitArrays(opts);
   errors = _.isValidArray(errors) ? errors : options.steps.verifyFormats(opts);

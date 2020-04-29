@@ -1,3 +1,4 @@
+const cleanDirs         = require('./clean-dirs');
 const findSourceFiles   = require('./find-source-files');
 const loadArrays        = require('./load-arrays');
 const preventOverwrite  = require('./prevent-overwrite');
@@ -10,6 +11,7 @@ const validate          = require('./validate');
 const verifyFormats     = require('./verify-formats');
 
 module.exports = {
+  cleanDirs,
   findSourceFiles,
   loadArrays,
   preventOverwrite,
