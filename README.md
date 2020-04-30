@@ -5,6 +5,8 @@
 ## Purpose  
 Matches multiple lines within large text files and replaces those lines with another set of lines while optionally preserving whitespace.  Both the old and new sets of lines may be passed in or read from a file.  Of course, the original file may be automatically backed up, if desired.
 
+> More info on _why_ I created this is on my blog: [https://fredlackey.com](https://www.fredlackey.com/2020/04/29/file-line-replacer/)
+
 ## Installation
 
 ```
